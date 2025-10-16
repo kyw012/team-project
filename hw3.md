@@ -12,6 +12,8 @@
 | FR6 | 報告生成 | 產出週報或月報，顯示分數變化、次數統計與平均表現。 |
 | FR7 | AI 提供建議 | 透過串接 ChatGPT 或 Gemini API，提供個人化的健身建議與問答互動。 |
 
+---
+
 ### 二、非功能性需求（Non-Functional Requirements）
 
 | 編號 | 非功能性需求 | 說明 |
@@ -22,6 +24,7 @@
 | NFR4 | 資料安全性 | 使用者影像資料僅用於辨識，不上傳雲端，保障隱私。 |
 | NFR5 | 可維護性 | 系統架構模組化，方便後續擴充新動作或新增 API。 |
 | NFR6 | 穩定性 | 系統於長時間運行（>1小時）下應保持穩定、不當機。 |
+
 ---
 
 ### 三、功能分解圖（Functional Decomposition Diagram, FDD）
@@ -61,31 +64,16 @@ graph TD
 ### 四、使用案例圖（Use Case Diagram）
 
 ```mermaid
-
-graph TD
-    actor[使用者] 
-    system((系統))
-    
-    actor --> |登入/登出| system
-    actor --> |上傳資料| system
-    actor --> |修改資料| system
-    actor --> |刪除資料| system
-    actor --> |查看結果| system
-
-```
-```mermaid
 graph TD
     actorUser([使用者])
     actorAI([AI 健身教練])
     
-    subgraph 系統[基於影像辨識的健身動作系統]
-        UC1(登入與管理帳號)
-        UC2(動作辨識與評分)
-        UC3(教學影片播放)
-        UC4(運動表現分析)
-        UC5(報告生成)
-        UC6(AI 提供建議)
-    end
+    UC1(登入/登出與管理帳號)
+    UC2(動作辨識與評分)
+    UC3(教學影片播放)
+    UC4(健身表現分析)
+    UC5(報告生成)
+    UC6(AI 提供建議)
 
     actorUser --> UC1
     actorUser --> UC2
@@ -93,10 +81,13 @@ graph TD
     actorUser --> UC4
     actorUser --> UC5
     actorUser --> UC6
-    
-    UC6 <---> actorAI
-```
 
+    UC6 <---> actorAI
+
+%% 設定顏色樣式
+    style actorUser fill:#D6EAF8,stroke:#3498DB,stroke-width:2px
+    style actorAI fill:#D6EAF8,stroke:#3498DB,stroke-width:2px
+```
 ---
 
 ### 五、使用案例說明（Use Case Descriptions）
