@@ -1,4 +1,4 @@
-#  HW3：功能性需求與非功能性需求
+##  HW3：功能性需求與非功能性需求
 
 ### 一、功能性需求（Functional Requirements）
 
@@ -83,9 +83,8 @@ graph TD
         UC2(動作辨識與評分)
         UC3(教學影片播放)
         UC4(運動表現分析)
-        UC5(動作改善追蹤)
-        UC6(報告生成)
-        UC7(AI 提供建議)
+        UC5(報告生成)
+        UC6(AI 提供建議)
     end
 
     actorUser --> UC1
@@ -94,9 +93,8 @@ graph TD
     actorUser --> UC4
     actorUser --> UC5
     actorUser --> UC6
-    actorUser --> UC7
     
-    UC7 <---> actorAI
+    UC6 <---> actorAI
 ```
 
 ---
