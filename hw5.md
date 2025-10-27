@@ -2,39 +2,57 @@
 
 ## 一、UML 類別圖（Class Diagram）
 
-系統主要包含四個核心類別：使用者（User）、動作辨識（ActionRecognition）、報告生成（ReportGenerator）、與健身建議（FitnessAdvisor）。
+系統主要包含6個核心類別：使用者、使用者介面、動作辨識服務、資料庫、報告生成、與AI建議。
 
 ```mermaid
 classDiagram
-    class User {
-        +userID: int
-        +name: string
-        +email: string
-        +login()
-        +uploadVideo()
+    direction LR
+
+    class 使用者 {
+        - 使用者ID: int
+        - 姓名: string
+        - Email: string
+        + 登入()
+        + 上傳影片()
+        + 查看報告()
+        + 提出問題()
     }
 
-    class ActionRecognition {
-        +detectPose(video)
-        +calculateAccuracy()
-        +displayScore()
+    class 使用者介面 {
+        + 顯示選單()
+        + 顯示報告()
     }
 
-    class ReportGenerator {
-        +analyzeData()
-        +generateChart()
-        +createReport()
+    class 動作辨識服務 {
+        + 偵測姿勢()
+        + 分析姿勢()
+        + 計算分數()
     }
 
-    class FitnessAdvisor {
-        +sendRequest(data)
-        +getSuggestion()
+    class 資料庫 {
+        + 儲存紀錄()
+        + 取得歷史數據()
     }
 
-    User --> ActionRecognition : 上傳影像
-    ActionRecognition --> ReportGenerator : 傳送辨識結果
-    ReportGenerator --> FitnessAdvisor : 提供分析數據
-    FitnessAdvisor --> User : 回傳建議
+    class 報告生成 {
+        + 生成圖表()
+        + 建立報告()
+    }
+
+    class AI建議 {
+        + 傳送請求()
+        + 取得建議()
+        
+    }
+
+    使用者 "1" -- "1" 使用者介面 : 與使用者介面互動
+    使用者介面 "1" --> "1" 動作辨識服務 : 啟動動作辨識流程
+    使用者介面 "1" --> "1" 報告生成 : 請求並顯示報告內容
+    使用者介面 "1" --> "1" AI建議 : 傳送問題以獲取AI建議
+    動作辨識服務 "1" --> "*" 資料庫 : 儲存單次訓練的詳細紀錄
+    報告生成 "1" --> "*" 資料庫 : 讀取所有歷史數據以供分析
+    AI建議 "1" --> "1" 使用者 : 回傳建議
+
 ```
 
 ## 二、循序圖（Sequence Diagrams）
