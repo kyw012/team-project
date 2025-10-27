@@ -70,6 +70,23 @@ sequenceDiagram
 
 ```
 
+### 案例三：獲取個人化健身建議
+
+```mermaid
+sequenceDiagram
+    participant U as 使用者
+    participant RG as 報告生成模組
+    participant FA as 健身建議模組
+    participant API as ChatGPT/Gemini API
+
+    U->>RG: 請求健身建議
+    RG->>FA: 傳送使用者運動數據
+    FA->>API: 發送請求
+    API-->>FA: 回傳健身建議
+    FA-->>U: 顯示個人化建議
+```
+
+
 ## 三、活動圖（Activity Diagrams）
 
 ### 案例一：登入系統
