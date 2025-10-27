@@ -58,15 +58,13 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant U as 使用者
+    participant AR as 動作辨識模組
     participant RG as 報告生成模組
-    participant FA as 健身建議模組
-    participant API as ChatGPT/Gemini API
 
-    U->>RG: 請求健身建議
-    RG->>FA: 傳送使用者運動數據
-    FA->>API: 發送請求
-    API-->>FA: 回傳健身建議
-    FA-->>U: 顯示個人化建議
+    U->>AR: 上傳動作影片
+    AR->>AR: 分析姿勢與計算正確率
+    AR-->>RG: 傳送辨識結果
+    RG-->>U: 顯示分數與動作建議
 
 ```
 
