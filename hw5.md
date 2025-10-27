@@ -39,7 +39,7 @@ classDiagram
 
 ## 二、循序圖（Sequence Diagrams）
 
-### 1：登入系統
+### 1.登入系統
 
 ```mermaid
 sequenceDiagram
@@ -53,7 +53,7 @@ sequenceDiagram
     S-->>U: 顯示登入成功或錯誤訊息
 ```
 
-### 2：上傳與辨識動作
+### 2.上傳與辨識動作
 
 ```mermaid
 sequenceDiagram
@@ -72,7 +72,7 @@ sequenceDiagram
 
 ## 三、活動圖（Activity Diagrams）
 
-### 1：登入系統
+### 1.登入系統
 
 ```mermaid
 flowchart TD
@@ -85,7 +85,7 @@ flowchart TD
     F --> G[結束]
 ```
 
-### 2：上傳與辨識動作
+### 2.上傳與辨識動作
 
 ```mermaid
 flowchart TD
@@ -98,7 +98,7 @@ flowchart TD
     F --> G
     G --> H[結束]
 ```
-### 3：獲取個人化健身建議
+### 3.獲取個人化健身建議
 
 ```mermaid
 flowchart TD
