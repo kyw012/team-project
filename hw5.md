@@ -2,7 +2,6 @@
 
 ## 一、UML 類別圖（Class Diagram）
 
-系統主要包含6個核心類別：使用者、使用者介面、動作辨識服務、資料庫、報告生成、與AI建議。
 
 ```mermaid
 classDiagram
