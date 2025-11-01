@@ -32,7 +32,6 @@ classDiagram
 
     class 資料庫 {
         - 連線狀態: boolean
-        - 資料庫類型: string
         - 紀錄總數: int
         + 儲存紀錄()
         + 取得歷史數據()
