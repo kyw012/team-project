@@ -1,6 +1,6 @@
 # 小組作業 5
 
-## 一、UML 類別圖（Class Diagram）
+## UML 類別圖（Class Diagram）
 
 
 ```mermaid
@@ -54,10 +54,10 @@ classDiagram
 
 ```
 
-## 二、循序圖（Sequence Diagrams）
 
-### 案例一：登入系統
 
+## 案例一：登入系統
+### 循序圖
 ```mermaid
 sequenceDiagram
     participant U as 使用者
@@ -69,9 +69,20 @@ sequenceDiagram
     DB-->>S: 回傳驗證結果
     S-->>U: 顯示登入成功或錯誤訊息
 ```
+### 活動圖
+```mermaid
+flowchart TD
+    A[開始] --> B[輸入帳號與密碼]
+    B --> C{帳密正確？}
+    C -->|是| D[登入成功]
+    C -->|否| E[顯示錯誤訊息]
+    D --> F[進入主畫面]
+    E --> F
+    F --> G[結束]
+```
 
-### 案例二：上傳與辨識動作
-
+## 案例二：上傳與辨識動作
+### 循序圖
 ```mermaid
 sequenceDiagram
     participant U as 使用者
@@ -84,9 +95,21 @@ sequenceDiagram
     RG-->>U: 顯示分數與動作建議
 
 ```
+### 活動圖
+```mermaid
+flowchart TD
+    A[開始] --> B[上傳影片]
+    B --> C[系統進行動作辨識]
+    C --> D{動作正確？}
+    D -->|是| E[顯示高分與鼓勵訊息]
+    D -->|否| F[顯示教學影片]
+    E --> G[更新分析資料]
+    F --> G
+    G --> H[結束]
+```
 
-### 案例三：獲取個人化健身建議
-
+## 案例三：獲取個人化健身建議
+### 循序圖
 ```mermaid
 sequenceDiagram
     participant U as 使用者
@@ -100,38 +123,7 @@ sequenceDiagram
     API-->>FA: 回傳健身建議
     FA-->>U: 顯示個人化建議
 ```
-
-
-## 三、活動圖（Activity Diagrams）
-
-### 案例一：登入系統
-
-```mermaid
-flowchart TD
-    A[開始] --> B[輸入帳號與密碼]
-    B --> C{帳密正確？}
-    C -->|是| D[登入成功]
-    C -->|否| E[顯示錯誤訊息]
-    D --> F[進入主畫面]
-    E --> F
-    F --> G[結束]
-```
-
-### 案例二：上傳與辨識動作
-
-```mermaid
-flowchart TD
-    A[開始] --> B[上傳影片]
-    B --> C[系統進行動作辨識]
-    C --> D{動作正確？}
-    D -->|是| E[顯示高分與鼓勵訊息]
-    D -->|否| F[顯示教學影片]
-    E --> G[更新分析資料]
-    F --> G
-    G --> H[結束]
-```
-### 案例三：獲取個人化健身建議
-
+### 活動圖
 ```mermaid
 flowchart TD
     %% 範例：更詳細、更真實的活動圖
