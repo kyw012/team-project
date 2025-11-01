@@ -46,7 +46,7 @@ classDiagram
     }
 
     class AI建議 {
-        - 建議內容: string
+        - 問題內容: string
         + 傳送請求()
         + 取得建議()
         
