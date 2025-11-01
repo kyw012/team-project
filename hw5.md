@@ -23,22 +23,30 @@ classDiagram
     }
 
     class 動作辨識服務 {
+        - 上傳影片
+        - 分析所需時間: float
         + 偵測姿勢()
         + 分析姿勢()
         + 計算分數()
     }
 
     class 資料庫 {
+        - 連線狀態: boolean
+        - 資料庫類型: string
+        - 紀錄總數: int
         + 儲存紀錄()
         + 取得歷史數據()
     }
 
     class 報告生成 {
+        - 報告ID: string
+        - 報告建立時間: datetime
         + 生成圖表()
         + 建立報告()
     }
 
     class AI建議 {
+        - 建議內容: string
         + 傳送請求()
         + 取得建議()
         
