@@ -6,6 +6,11 @@
 
 # 分鏡板(storyboard) 
 
-## 1.使用者登入畫面
+### 1.使用者登入畫面
+![LOGIN](login1.jpg "login")
 
-## 2.螢幕與報表列印欄位名稱與功能
+### 2.首頁 
+![MENU](menu.jpg "menu")
+
+### 3. AI 教練 (coach.jpg)
+![coach](coach1.jpg "coach")
