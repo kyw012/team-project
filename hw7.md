@@ -1,4 +1,4 @@
-## 系統實體關係圖 (ERD)
+# 系統實體關係圖 (ERD)
 
 ```mermaid
 erDiagram
@@ -57,7 +57,7 @@ erDiagram
     User ||--o{ WeeklySummary : 彙總 (aggregates)
     User ||--o{ HistoryTrend : 追蹤 (tracks)
 ```
-###  資料庫結構分析
+##  資料庫結構分析
 
 系統中主要涵蓋四個核心實體（Entity）：使用者、訓練紀錄、訓練項目、訓練建議。
 
@@ -69,13 +69,13 @@ erDiagram
 | **訓練建議 (AI_Feedback)** | AI 教練基於訓練紀錄給出的個性化建議。 | FeedbackID |
 
 
-### 組合實體
+## 組合實體
 
 1.  **本週彙總數據 (WeeklySummary)**：這是從多筆 **訓練紀錄** 聚合計算而來的數據（總訓練時間、總卡路里、總次數）。它依賴於 \`TrainingRecord\` 實體。
 2.  **歷史趨勢數據 (HistoryTrend)**：這是從多筆 **訓練紀錄** 聚合計算而來的分數變化趨勢和運動天數統計。它也依賴於 \`TrainingRecord\` 實體。
 
 
-###  關鍵實體與屬性說明
+##  關鍵實體與屬性說明
 
 | 實體名稱 | 關係類型 | 關鍵屬性 |
 | :--- | :--- | :--- |
