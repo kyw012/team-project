@@ -1,7 +1,6 @@
 # 系統實體關係圖 (ERD)
 
 ```mermaid
-
 erDiagram
     %% 實體定義
     User {
@@ -49,15 +48,14 @@ erDiagram
         int WorkoutDays "本週運動天數"
     }
 
-    %% 關係定義
-    User ||--o{ TrainingRecord : 進行 (performs)
-    Exercise ||--o{ TrainingRecord : 屬於 (is_of)
-    TrainingRecord ||--o| AI_Feedback : 產生建議 (generates_feedback)
+    %% 關係定義 (已修正，移除中文關係標籤)
+    User ||--o{ TrainingRecord : performs
+    Exercise ||--o{ TrainingRecord : is_of
+    TrainingRecord ||--o| AI_Feedback : generates_feedback
 
     %% 組合實體與原始實體的關係
-    User ||--o{ WeeklySummary : 彙總 (aggregates)
-    User ||--o{ HistoryTrend : 追蹤 (tracks)
-
+    User ||--o{ WeeklySummary : aggregates
+    User ||--o{ HistoryTrend : tracks
 ```
 
 ##  資料庫結構分析
