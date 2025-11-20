@@ -1,6 +1,7 @@
 # 系統實體關係圖 (ERD)
 
 ```mermaid
+
 erDiagram
     %% 實體定義
     User {
@@ -56,7 +57,9 @@ erDiagram
     %% 組合實體與原始實體的關係
     User ||--o{ WeeklySummary : 彙總 (aggregates)
     User ||--o{ HistoryTrend : 追蹤 (tracks)
+
 ```
+
 ##  資料庫結構分析
 
 系統中主要涵蓋四個核心實體（Entity）：使用者、訓練紀錄、訓練項目、訓練建議。
