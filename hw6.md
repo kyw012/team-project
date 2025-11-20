@@ -12,5 +12,6 @@
 ### 2.首頁 
 ![MENU](menu.jpg "menu")
 
-### 3. AI 教練 (coach.jpg)
+### 3. AI 教練 
 ![coach](coach1.jpg "coach")
+
