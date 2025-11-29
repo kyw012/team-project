@@ -2,87 +2,49 @@
 
 ```mermaid
 erDiagram
+    %% 使用者主體 (由 Firebase Auth 與 Firestore Profile 構成)
+    User ||--|| UserProfile : "owns"
+    User ||--o{ TrainingRecord : "performs"
+    
+    %% 訓練紀錄與其他實體的關係
+    TrainingRecord }|--|| Exercise : "is type of"
+    TrainingRecord ||--|| AI_Feedback : "triggers"
+
     %% 實體定義
     User {
-        int UserID PK "使用者ID"
-        string Email "電子郵件/帳號"
-        string Password "密碼 (Hash)"
+        string UserID PK "Firebase Auth UID"
+        string Email "登入帳號"
+        string Password "加密密碼 (Auth托管)"
+    }
+
+    UserProfile {
+        string UserID FK "文件路徑 ID"
+        string Name "暱稱"
+        string Email "聯絡信箱"
+        timestamp JoinedAt "註冊時間"
     }
 
     Exercise {
-        int ExerciseID PK "訓練項目ID"
-        string Name "項目名稱 (深蹲, 平板撐)"
+        int ExerciseID PK "代碼 (1:Squat, 2:Plank)"
+        string Name "名稱"
+        float CalorieFactor "卡路里係數"
     }
 
     TrainingRecord {
-        int RecordID PK "紀錄ID"
-        int UserID FK "使用者ID"
-        int ExerciseID FK "訓練項目ID"
-        date Date "訓練日期"
-        int Quantity "次數/時間 (15, 2, 20)"
-        int AiScore "AI 評分 (75-92)"
-        float DurationMinutes "持續時間(分鐘)"
-        float CaloriesConsumed "消耗卡路里"
+        string RecordID PK "Firestore Doc ID"
+        string UserID FK "關聯使用者"
+        int ExerciseID FK "關聯運動項目"
+        timestamp Date "訓練日期時間"
+        int Quantity "次數 (Reps)"
+        int AiScore "AI 評分 (0-100)"
+        float DurationMinutes "持續時間 (分)"
+        float CaloriesConsumed "消耗卡路里 (kcal)"
     }
 
     AI_Feedback {
-        int FeedbackID PK "建議ID"
-        int RecordID FK "訓練紀錄ID"
-        string AiSuggestion "AI 教練的建議文字"
-        string IssueDetected "偵測到的問題 (Valgus collapse)"
+        string FeedbackID PK "Firestore Doc ID"
+        string RecordID FK "關聯訓練紀錄 ID"
+        string AiSuggestion "AI 建議內容"
+        string IssueDetected "偵測到的問題 (如:深度不足)"
     }
-
-    %% 組合實體 (Composite Entities) - 基於 TrainingRecord 聚合
-
-    WeeklySummary {
-        int UserID FK "使用者ID"
-        float TotalTime "本週總訓練時間"
-        int TotalCalories "本週總卡路里"
-        int TotalReps "本週總訓練次數"
-    }
-
-    HistoryTrend {
-        int UserID FK "使用者ID"
-        date WeekEndDate "週結尾日期"
-        float AverageScore "週平均分數"
-        int WorkoutDays "本週運動天數"
-    }
-
-    %% 關係定義 (已修正，移除中文關係標籤)
-    User ||--o{ TrainingRecord : performs
-    Exercise ||--o{ TrainingRecord : is_of
-    TrainingRecord ||--o| AI_Feedback : generates_feedback
-
-    %% 組合實體與原始實體的關係
-    User ||--o{ WeeklySummary : aggregates
-    User ||--o{ HistoryTrend : tracks
 ```
-
-##  資料庫結構分析
-
-系統中主要涵蓋四個核心實體（Entity）：使用者、訓練紀錄、訓練項目、訓練建議。
-
-| 實體名稱 (Entity) | 描述 | 識別碼 (PK) |
-| :--- | :--- | :--- |
-| **使用者 (User)** | 系統的使用者帳號資訊。 | UserID |
-| **訓練項目 (Exercise)** | 系統中預設的運動項目，如深蹲、平板撐等。 | ExerciseID |
-| **訓練紀錄 (TrainingRecord)** | 每次訓練的詳細歷史數據和結果。 | RecordID |
-| **訓練建議 (AI_Feedback)** | AI 教練基於訓練紀錄給出的個性化建議。 | FeedbackID |
-
-
-## 組合實體
-
-1.  **本週彙總數據 (WeeklySummary)**：這是從多筆 **訓練紀錄** 聚合計算而來的數據（總訓練時間、總卡路里、總次數）。它依賴於 \`TrainingRecord\` 實體。
-2.  **歷史趨勢數據 (HistoryTrend)**：這是從多筆 **訓練紀錄** 聚合計算而來的分數變化趨勢和運動天數統計。它也依賴於 \`TrainingRecord\` 實體。
-
-
-##  關鍵實體與屬性說明
-
-| 實體名稱 | 關係類型 | 關鍵屬性 |
-| :--- | :--- | :--- |
-| **User** | **1-對多 (1:M)** | \`UserID\` (PK), \`Email\` |
-| **Exercise** | **1-對多 (1:M)** | \`ExerciseID\` (PK), \`Name\` (深蹲, 平板撐) |
-| **TrainingRecord** | **多對多 (M:M)** 之間的中介實體 | \`RecordID\` (PK), \`AiScore\`, \`Quantity\`, \`CaloriesConsumed\` |
-| **AI\_Feedback** | **1-對1 (1:1)** | \`FeedbackID\` (PK), \`AiSuggestion\`, \`IssueDetected\` (e.g., Valgus collapse) |
-| **WeeklySummary** | **組合實體** | \`TotalTime\`, \`TotalCalories\`, \`TotalReps\` (來自 TrainingRecord 聚合) |
-| **HistoryTrend** | **組合實體** | \`AverageScore\`, \`WorkoutDays\` (來自 TrainingRecord 聚合) |
